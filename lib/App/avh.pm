@@ -2,6 +2,7 @@ package App::avh;
 
 use strict;
 use warnings;
+use autodie;
 use 5.010;
 use File::Path qw( mkpath );
 use File::Basename qw( dirname );
