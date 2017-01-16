@@ -2,9 +2,13 @@
 
 install:
   - c:\perl\bin\perl -v
+  - wget --help
 
 build: off
 
 test_script: []
 
 shallow_clone: true
+
+cache:
+  - c:\strawberry
