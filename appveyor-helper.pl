@@ -109,7 +109,7 @@ else
   die "unknown ci_perl: $ci_perl";
 }
 
-unshift @PATH, File::Spec->catdir($dir, 'bin');
+unshift @PATH, File::Spec->catdir($dir, 'bat');
 
 run 'perl', '-v';
 
