@@ -11,7 +11,7 @@ my $ci_perl          = $ENV{CI_PERL} // 'strawberry';
 my $ci_perl_version  = $ENV{CI_PERL_VERSION};
 my $ci_perl_wordsize = $ENV{CI_PERL_WORDSIZE} // 64;
 
-my $mode = 'none';
+my $mode = $ENV{CI_PERL_MODE} // 'none';
 
 if(-f 'dist.ini')
 { $mode = 'dzil' }
@@ -126,13 +126,15 @@ if($@)
 if($mode eq 'dzil')
 {
   run 'cpanm', '-n', 'Dist::Zilla';
-  my @authordeps = `dzil authordeps --missing`;
-  chomp @authordeps;
-  run 'cpanm', '-n', @authordeps;
-  my @listdeps   = `dzil listdeps --missing`;
-  chomp @listdeps;
-  run 'cpanm', '-n', @listdeps;
-  #run 'dzil', 'run', 'cpanm --installdeps .';
+  if(-f 'dzil.ini')
+  {
+    my @authordeps = `dzil authordeps --missing`;
+    chomp @authordeps;
+    run 'cpanm', '-n', @authordeps;
+    my @listdeps   = `dzil listdeps --missing`;
+    chomp @listdeps;
+    run 'cpanm', '-n', @listdeps;
+  }
 }
 elsif($mode ne 'none')
 {
