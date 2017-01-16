@@ -1,14 +1,23 @@
 ---
 
 install:
-  - c:\perl\bin\perl -v
-  - wget --help
+  - .\appveyor-helper.bat
 
 build: off
 
-test_script: []
+test_script:
+  - perl -v
 
 shallow_clone: true
 
 cache:
   - c:\strawberry
+
+environment:
+  matrix:
+    - CI_PERL: strawberry
+      CI_PERL_VERSION: 5.24
+      CI_PERL_WORDSIZE: 32
+    - CI_PERL: strawberry
+      CI_PERL_VERSION: 5.24
+      CI_PERL_WORDSIZE: 64
