@@ -25,6 +25,38 @@ sub main
       close $fh;
     }
   }
+  elsif($command eq 'which')
+  {
+    my $command = shift @ARGV;
+    unless(eval { require File::Which; 1})
+    {
+      system 'cpanm', 'File::Which';
+      require File::Which;
+    }
+    say for File::Which::which($command);
+  }
+  elsif($command eq 'whichpm')
+  {
+    unless(eval { require Module::Which; 1 })
+    {
+      system 'cpanm', 'Module::Which';
+      require Module::Which;
+    }
+    foreach my $module (@ARGV)
+    {
+      my $info = Module::Which::Which($module);
+      say "[$module]";
+      unless($info)
+      {
+        say "  NOT INSTALLED";
+        next;
+      }
+      my $path = $info->{$module}->{path};
+      my $version = $info->{$module}->{version};
+      say "  path    = $path";
+      say "  version = $version";
+    }
+  }
   else
   {
     die "unknown command";

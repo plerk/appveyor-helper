@@ -70,6 +70,33 @@ elsif($ci_perl eq 'activestate')
 }
 elsif($ci_perl eq 'msys2')
 {
+  if($ci_perl_wordsize != 64)
+  {
+    die "only MSYS2 64 bit is supported atm";
+  }
+  
+  unshift @PATH, qw(
+    C:\avh\bin
+    c:\msys64\usr\bin
+  );
+  
+  $ENV{PERL5LIB}            = '/c/avh/lib/perl5';
+  $ENV{PERL_LOCAL_LIB_ROOT} = '/c/avh';
+  $ENV{PERL_MB_OPT}         = '--install_base /c/avh';
+  $ENV{PERL_MM_OPT}         = 'INSTALL_BASE=/c/avh';
+
+  run 'bash', '-l', -c => 'true';
+  run 'bash', '-l', -c => 'pacman -Syuu --noconfirm';
+  run 'bash', '-l', -c => 'pacman -S make';
+  run 'bash', '-l', -c => 'pacman -S gcc';
+  run 'bash', '-l', -c => 'pacman -S perl';
+  
+  run 'curl', -o => 'cpanm-bootstrap', 'https://cpanmin.us';
+  run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
+  unlink 'cpanm-bootstrap';
+  
+  push @PATH, File::Spec->catdir($dir, 'wrapper');
+  push @env_to_save, qw( PATH PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT );
 }
 elsif($ci_perl eq 'cygwin')
 {
