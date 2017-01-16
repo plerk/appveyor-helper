@@ -119,7 +119,7 @@ if($mode eq 'dzil')
   my @listdeps   = `dzil listdeps --missing`;
   chomp @listdeps;
   run 'cpanm', '-n', @listdeps;
-  run 'dzil', 'run', 'cpanm --installdeps .';
+  #run 'dzil', 'run', 'cpanm --installdeps .';
 }
 elsif($mode ne 'none')
 {
