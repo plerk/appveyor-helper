@@ -16,6 +16,7 @@ shallow_clone: true
 
 cache:
   - c:\strawberry
+  - c:\avh
 
 environment:
   matrix:
