@@ -87,9 +87,9 @@ elsif($ci_perl eq 'msys2')
 
   run 'bash', '-l', -c => 'true';
   run 'bash', '-l', -c => 'pacman -Syuu --noconfirm';
-  run 'bash', '-l', -c => 'pacman -S make';
-  run 'bash', '-l', -c => 'pacman -S gcc';
-  run 'bash', '-l', -c => 'pacman -S perl';
+  run 'bash', '-l', -c => 'pacman -S make --noconfirm';
+  run 'bash', '-l', -c => 'pacman -S gcc --noconfirm';
+  run 'bash', '-l', -c => 'pacman -S perl --noconfirm';
   
   run 'curl', -o => 'cpanm-bootstrap', 'https://cpanmin.us';
   run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
