@@ -24,8 +24,8 @@ environment:
   - CI_PERL: msys2
     CI_PERL_WORDSIZE: 64
   
-#  - CI_PERL: cygwin
-#    CI_PERL_WORDSIZE: 32
+  - CI_PERL: cygwin
+    CI_PERL_WORDSIZE: 32
 
   - CI_PERL: strawberry
     CI_PERL_VERSION: 5.24

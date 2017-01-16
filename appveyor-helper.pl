@@ -158,7 +158,7 @@ if($@)
 if($mode eq 'dzil')
 {
   run 'cpanm', '-n', 'Dist::Zilla';
-  if(-f 'dzil.ini')
+  if(-f 'dist.ini')
   {
     my @authordeps = `dzil authordeps --missing`;
     chomp @authordeps;
