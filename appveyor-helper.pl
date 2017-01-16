@@ -101,13 +101,15 @@ elsif($ci_perl eq 'cygwin')
   run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
   unlink 'cpanm-bootstrap';
   
-  push @PATH, File::Spec->catdir($dir, 'bat');
+  push @PATH, File::Spec->catdir($dir, 'wrapper');
   push @env_to_save, qw( PATH PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT );
 }
 else
 {
   die "unknown ci_perl: $ci_perl";
 }
+
+unshift @PATH, File::Spec->catdir($dir, 'bin');
 
 run 'perl', '-v';
 

@@ -9,8 +9,8 @@ test_script:
   - perl -v
   - perl -E "use Env qw( @PATH); say $_ for @PATH"
   - cpanm -V
-  - dir c:\msys64
-  - dir c:\msys32
+  - avh wrapper corelist
+  - corelist strict
 
 shallow_clone: true
 
