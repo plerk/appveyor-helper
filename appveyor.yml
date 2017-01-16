@@ -2,6 +2,7 @@
 
 install:
   - .\appveyor-helper.bat
+  - DOSKEY dktest=echo $*
   - dktest foo bar baz
 
 build: off
