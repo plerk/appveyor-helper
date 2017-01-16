@@ -88,6 +88,7 @@ elsif($ci_perl eq 'cygwin')
       C:\cygwin64\bin
     );
   }
+  unshift @PATH, File::Spec->catdir($dir, bat);
   push @env_to_save, 'PATH';
 }
 else
