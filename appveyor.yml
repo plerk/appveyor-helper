@@ -7,7 +7,7 @@ build: off
 
 test_script:
   - perl -v
-  - cpanm -v
+  - cpanm -V
 
 shallow_clone: true
 
