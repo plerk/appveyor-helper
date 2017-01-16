@@ -32,9 +32,6 @@ sub run
   }
 }
 
-my %doskey = (
-  dktest => 'echo $*',
-);
 my @env_to_save;
 
 if($ci_perl eq 'strawberry')
@@ -92,8 +89,6 @@ elsif($ci_perl eq 'cygwin')
     );
   }
   push @env_to_save, 'PATH';
-  $doskey{cpanm} = 'perl -e "exec @ARGV" $*';
-  $doskey{dzil}  = 'perl -e "exec @ARGV" $*'; 
 }
 else
 {
@@ -133,5 +128,4 @@ elsif($mode ne 'none')
 my $fn = File::Spec->catfile($dir, 'appveyor-helper-env.bat');
 open my $fh, '>', $fn;
 say $fh "SET $_=$ENV{$_}" for @env_to_save;
-say $fh "DOSKEY $_=$doskey{$_}" for keys %doskey;
 close $fh;

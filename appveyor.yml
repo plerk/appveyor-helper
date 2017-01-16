@@ -2,19 +2,17 @@
 
 install:
   - .\appveyor-helper.bat
-  - DOSKEY dktest=echo $*
-  - dktest foo bar baz
 
 build: off
 
 test_script:
   - perl -v
+  - cpanm -v
 
 shallow_clone: true
 
 cache:
   - c:\strawberry
-  - c:\avh
 
 environment:
   matrix:
