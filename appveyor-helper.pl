@@ -54,6 +54,7 @@ if($ci_perl eq 'strawberry')
     $msi_filename =~ s!^.*\/!!;
   
     run 'msiexec', '/i', $msi_filename, '/quiet', '/qn', '/norestart';
+    unlink $msi_filename;
   }
   
   unshift @PATH, qw(
@@ -75,6 +76,7 @@ elsif($ci_perl eq 'cygwin')
   if($ci_perl_wordsize == 32)
   {
     unshift @PATH, qw(
+      C:\avh\bin
       C:\cygwin\usr\local\bin
       C:\cygwin\usr\bin
       C:\cygwin\bin
@@ -83,13 +85,24 @@ elsif($ci_perl eq 'cygwin')
   elsif($ci_perl_wordsize == 64)
   {
     unshift @PATH, qw(
+      C:\avh\bin
       C:\cygwin64\usr\local\bin
       C:\cygwin64\usr\bin
       C:\cygwin64\bin
     );
   }
+  
+  $ENV{PERL5LIB}            = '/cygdrive/c/avh/lib/perl5';
+  $ENV{PERL_LOCAL_LIB_ROOT} = '/cygdrive/c/avh';
+  $ENV{PERL_MB_OPT}         = '--install_base /cygdrive/c/avh';
+  $ENV{PERL_MM_OPT}         = 'INSTALL_BASE=/cygdrive/c/avh';
+  
+  run 'curl', -o => 'cpanm-bootstrap', 'https://cpanmin.us';
+  run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
+  unlink 'cpanm-bootstrap';
+  
   push @PATH, File::Spec->catdir($dir, 'bat');
-  push @env_to_save, 'PATH';
+  push @env_to_save, qw( PATH PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT );
 }
 else
 {
