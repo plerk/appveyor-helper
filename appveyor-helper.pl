@@ -133,5 +133,5 @@ elsif($mode ne 'none')
 my $fn = File::Spec->catfile($dir, 'appveyor-helper-env.bat');
 open my $fh, '>', $fn;
 say $fh "SET $_=$ENV{$_}" for @env_to_save;
-say $fh "DOSKEY $_=$doskey{$_}" for @env_to_save;
+say $fh "DOSKEY $_=$doskey{$_}" for keys %doskey;
 close $fh;
