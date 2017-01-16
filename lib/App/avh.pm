@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use autodie;
 use 5.010;
-use File::Path qw( mkpath );
 use File::Basename qw( dirname );
 
 sub main
@@ -17,7 +16,7 @@ sub main
     if($^O eq 'cygwin' || $^O eq 'msys')
     {
       my $dir = dirname __FILE__;
-      my $filename = "$dir/../wrapper/$alias.bat";
+      my $filename = "$dir/../../wrapper/$alias.bat";
       open my $fh, '>', $filename;
       say $fh '@echo off';
       say $fh q{perl -e "exec '}, $alias, q{', @ARGV; die 'command not found'" -- %*}; 
