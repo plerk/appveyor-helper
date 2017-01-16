@@ -93,6 +93,7 @@ elsif($ci_perl eq 'msys2')
   
   run 'curl', -o => 'cpanm-bootstrap', 'https://cpanmin.us';
   run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
+  run 'cpanm', 'Module::CoreList';
   unlink 'cpanm-bootstrap';
   
   push @PATH, File::Spec->catdir($dir, 'wrapper');
