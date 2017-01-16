@@ -65,8 +65,6 @@ if($ci_perl eq 'strawberry')
     C:\strawberry\perl\bin
   );
   
-  run 'perl', '-v';
-  
   push @env_to_save, 'PATH';
 }
 elsif($ci_perl eq 'activestate')
@@ -101,6 +99,8 @@ else
 {
   die "unknown ci_perl: $ci_perl";
 }
+
+run 'perl', '-v';
 
 #eval {
 #  run 'cpanm', '-n', 'App::cpanoutdated';
