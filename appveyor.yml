@@ -1,0 +1,10 @@
+---
+
+install:
+  - c:\perl\bin\perl -v
+
+build: off
+
+test_script: []
+
+shallow_clone: true
