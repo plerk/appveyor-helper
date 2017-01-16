@@ -93,10 +93,12 @@ elsif($ci_perl eq 'msys2')
   
   run 'curl', -o => 'cpanm-bootstrap', 'https://cpanmin.us';
   run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
-  run 'cpanm', 'Module::CoreList';
   unlink 'cpanm-bootstrap';
   
   push @PATH, File::Spec->catdir($dir, 'wrapper');
+  
+  run 'cpanm', 'Module::CoreList';
+  
   push @env_to_save, qw( PATH PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT );
 }
 elsif($ci_perl eq 'cygwin')
