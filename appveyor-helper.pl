@@ -155,6 +155,14 @@ if($@)
   say "update of outdated modules failed, proceeding anyway";
 }
 
+if($ENV{CI_PERL_MOD})
+{
+  foreach my $mod (split /\//, $ENV{CI_PERL_MOD})
+  {
+    run 'cpanm', '-n', '-v', $mod;
+  }
+}
+
 if($mode eq 'dzil')
 {
   run 'cpanm', '-n', 'Dist::Zilla';
