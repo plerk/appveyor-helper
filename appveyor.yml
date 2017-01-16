@@ -7,8 +7,8 @@ build: off
 
 test_script:
   - perl -v
-  - cpanm -V
   - perl -E "use Env qw( @PATH); say $_ for @PATH"
+  - cpanm -V
 
 shallow_clone: true
 
