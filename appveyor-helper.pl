@@ -71,6 +71,16 @@ if($ci_perl eq 'strawberry')
 }
 elsif($ci_perl eq 'activestate')
 {
+  $ci_perl_version //= '5.24';
+  my $bits = $ci_perl_wordsize == 64 ? 'x64' : 'x86-64int';
+  
+  # TODO:: parse out of http://www.activestate.com/activeperl/downloads
+  my %urls = (
+    '5.24' => "http://downloads.activestate.com/ActivePerl/releases/5.24.1.2402/ActivePerl-5.24.1.2402-MSWin32-${bits}-401627.exe",
+    '5.22' => "http://downloads.activestate.com/ActivePerl/releases/5.22.3.2204/ActivePerl-5.22.3.2204-MSWin32-${bits}-401627.exe",
+  );
+  
+  die "TODO";
 }
 elsif($ci_perl eq 'msys2')
 {
@@ -91,9 +101,11 @@ elsif($ci_perl eq 'msys2')
 
   run 'bash', '-l', -c => 'true';
   run 'bash', '-l', -c => 'pacman -Syuu --noconfirm';
-  run 'bash', '-l', -c => 'pacman -S make --noconfirm';
-  run 'bash', '-l', -c => 'pacman -S gcc --noconfirm';
-  run 'bash', '-l', -c => 'pacman -S perl --noconfirm';
+  run 'bash', '-l', -c => "pacman -S $_ --noconfirm" for qw( 
+    make
+    gcc
+    perl
+  );
   
   run 'curl', -o => 'cpanm-bootstrap', 'https://cpanmin.us';
   run 'perl', 'cpanm-bootstrap', 'App::cpanminus';
@@ -101,6 +113,8 @@ elsif($ci_perl eq 'msys2')
   
   push @PATH, File::Spec->catdir($dir, 'wrapper');
   
+  # need to make sure core stuff is installed.
+  # there is probably a package for that.
   run 'cpanm', 'Module::CoreList';
   
   push @env_to_save, qw( PATH PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT );

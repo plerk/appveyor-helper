@@ -17,6 +17,7 @@ test_script:
   - g++ --version
   - avh wrapper corelist
   - corelist strict
+  - C:\Perl\bin\perl -v
 
 shallow_clone: true
 
