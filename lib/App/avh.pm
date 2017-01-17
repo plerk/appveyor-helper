@@ -30,7 +30,7 @@ sub main
     my $command = shift @ARGV;
     unless(eval { require File::Which; 1})
     {
-      system 'cpanm', '-v', 'File::Which';
+      system 'cpanm', '-n', 'File::Which';
       require File::Which;
     }
     say for File::Which::which($command);
@@ -39,7 +39,7 @@ sub main
   {
     unless(eval { require Module::Which; 1 })
     {
-      system 'cpanm', 'Module::Which';
+      system 'cpanm', '-n', 'Module::Which';
       require Module::Which;
     }
     foreach my $module (@ARGV)
