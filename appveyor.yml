@@ -10,7 +10,7 @@ test_script:
   - perl -E "use Env qw( @PATH); say $_ for @PATH"
   - cpanm -V
   - avh which %MYMAKE%
-  - %MYMAKE% --version
+  - '%MYMAKE% --version'
   - avh which gcc
   - gcc --version
   - avh which g++
