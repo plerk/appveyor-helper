@@ -9,11 +9,14 @@ test_script:
   - perl -v
   - perl -E "use Env qw( @PATH); say $_ for @PATH"
   - cpanm -V
+  - avh which make
+  - make --version
+  - avh which gcc
   - gcc --version
+  - avh which g++
   - g++ --version
   - avh wrapper corelist
   - corelist strict
-  - dir C:\Users\Public\Desktop\
 
 shallow_clone: true
 
