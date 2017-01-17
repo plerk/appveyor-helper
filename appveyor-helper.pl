@@ -228,10 +228,10 @@ if($mode eq 'dzil')
   {
     my @authordeps = `dzil authordeps --missing`;
     chomp @authordeps;
-    run 'cpanm', '-n', @authordeps;
+    run 'cpanm', '-n', @authordeps if @authordeps > 0;
     my @listdeps   = `dzil listdeps --missing`;
     chomp @listdeps;
-    run 'cpanm', '-n', @listdeps;
+    run 'cpanm', '-n', @listdeps if @listdeps > 0;
   }
 }
 elsif($mode ne 'none')
