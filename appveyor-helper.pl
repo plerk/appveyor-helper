@@ -103,6 +103,9 @@ elsif($ci_perl eq 'msys2')
 }
 elsif($ci_perl eq 'cygwin')
 {
+  my $setup_url;
+  my @setup = qw( -q -g );
+
   if($ci_perl_wordsize == 32)
   {
     unshift @PATH, qw(
@@ -111,6 +114,8 @@ elsif($ci_perl eq 'cygwin')
       C:\cygwin\usr\bin
       C:\cygwin\bin
     );
+    $setup_url = 'https://cygwin.com/setup-x86.exe';
+    push @setup, '-R', 'c:\cygwin';
   }
   elsif($ci_perl_wordsize == 64)
   {
@@ -120,7 +125,12 @@ elsif($ci_perl eq 'cygwin')
       C:\cygwin64\usr\bin
       C:\cygwin64\bin
     );
+    $setup_url = 'https://cygwin.com/setup-x86_64.exe';
+    push @setup, '-R', 'c:\cygwin64';
   }
+  
+  run 'curl', -o => 'c:/avh/bin/cyg-setup.exe', $setup_url;
+  run 'cyg-setup', @setup, -P => 'libcrypt-devel';
   
   $ENV{PERL5LIB}            = '/cygdrive/c/avh/lib/perl5';
   $ENV{PERL_LOCAL_LIB_ROOT} = '/cygdrive/c/avh';
