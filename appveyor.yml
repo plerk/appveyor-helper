@@ -36,7 +36,7 @@ environment:
     MYMAKE: make
 
   - CI_PERL: cygwin
-    CI_PERL_MOD: YAML::XS
+    CI_PERL_MOD: Dist::Zilla
     CI_PERL_WORDSIZE: 32
     MYMAKE: make
 

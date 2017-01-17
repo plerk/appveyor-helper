@@ -134,7 +134,37 @@ elsif($ci_perl eq 'cygwin')
   }
   
   run 'curl', -o => 'c:/avh/bin/cyg-setup.exe', $setup_url;
-  run 'cyg-setup', @setup, -P => 'libcrypt-devel';
+  run 'cyg-setup', @setup, -P => join(',', qw(
+    zlib-devel
+    openssl-devel
+    libxml2-devel
+    libuuid-devel
+    libsasl2-devel
+    libreadline-devel
+    libpq-devel
+    libpng16-devel
+    libpng-devel
+    libpcre-devel
+    libncurses-devel
+    liblzo2-devel
+    liblzma-devel
+    libintl-devel
+    libiconv-devel
+    libfreetype-devel
+    libfontconfig-devel
+    libedit-devel
+    libdb-devel
+    libcrypt-devel
+    libffi-devel
+    libexpat-devel
+    libbz2-devel
+    libarchive-devel
+    libGL-devel
+    libEGL-devel
+    cygwin-devel
+  ));
+
+  run 'cyg-setup', @setup, -P $ENV{CI_PERL_CYGWIN_PACKAGES} if $ENV{CI_PERL_CYGWIN_PACKAGES};
   
   $ENV{PERL5LIB}            = '/cygdrive/c/avh/lib/perl5';
   $ENV{PERL_LOCAL_LIB_ROOT} = '/cygdrive/c/avh';
