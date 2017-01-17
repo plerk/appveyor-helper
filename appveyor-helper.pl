@@ -4,6 +4,10 @@ use 5.010;
 use File::Basename qw( dirname );
 use Env qw( @PATH );
 use File::Spec;
+use File::Path qw( mkpath );
+
+mkpath 'c:/avh/bin', 0, 0755;
+mkpath 'c:/avh/cygwin-setup-cache', 0, 0755;
 
 my $dir = dirname __FILE__;
 
@@ -104,7 +108,7 @@ elsif($ci_perl eq 'msys2')
 elsif($ci_perl eq 'cygwin')
 {
   my $setup_url;
-  my @setup = qw( -q -g );
+  my @setup = qw( -q -g --local-package-dir c:\avh\cygwin-setup-cache );
 
   if($ci_perl_wordsize == 32)
   {
