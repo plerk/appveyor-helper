@@ -9,8 +9,11 @@ test_script:
   - perl -v
   - perl -E "use Env qw( @PATH); say $_ for @PATH"
   - cpanm -V
+  - gcc --version
+  - g++ --version
   - avh wrapper corelist
   - corelist strict
+  - dir C:\Users\Public\Desktop\
 
 shallow_clone: true
 
@@ -27,9 +30,9 @@ environment:
   - CI_PERL: cygwin
     CI_PERL_WORDSIZE: 32
 
-  - CI_PERL: cygwin
-    CI_PERL_MOD: Moose
-    CI_PERL_WORDSIZE: 32
+#  - CI_PERL: cygwin
+#    CI_PERL_MOD: Moose
+#    CI_PERL_WORDSIZE: 32
 
   - CI_PERL: strawberry
     CI_PERL_VERSION: 5.24
