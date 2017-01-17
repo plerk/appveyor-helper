@@ -164,7 +164,7 @@ elsif($ci_perl eq 'cygwin')
     cygwin-devel
   ));
 
-  run 'cyg-setup', @setup, -P $ENV{CI_PERL_CYGWIN_PACKAGES} if $ENV{CI_PERL_CYGWIN_PACKAGES};
+  run 'cyg-setup', @setup, -P => $ENV{CI_PERL_CYGWIN_PACKAGES} if $ENV{CI_PERL_CYGWIN_PACKAGES};
   
   $ENV{PERL5LIB}            = '/cygdrive/c/avh/lib/perl5';
   $ENV{PERL_LOCAL_LIB_ROOT} = '/cygdrive/c/avh';
